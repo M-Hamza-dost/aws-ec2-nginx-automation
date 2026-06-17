@@ -1,3 +1,16 @@
+terraform {
+    required_providers {
+        aws = {
+            source = "hashicorp/aws"
+            version = "~> 5.0"
+        }
+    }
+}
+
+provider "aws" {
+    region = "eu-north-1"
+}
+
 # Generate private key
 
 resource "tls_private_key" "ssh_key" {
@@ -38,7 +51,7 @@ resource "aws_security_group" "web_sg" {
 # EC2 
 
 resource "aws_instance" "web" {
-  ami           = "ami-0c55b159cbfafe1f0"
+  ami           = "ami-023b6eace47afd3b4"
   instance_type = var.instance_type
   key_name      = aws_key_pair.generated_key.key_name
   security_groups = [aws_security_group.web_sg.name]
